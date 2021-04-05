@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 # Script for automated meming
 require 'yaml'
 require 'clipboard'
