@@ -1,0 +1,22 @@
+structures: # If more than one structure is found a random is selected each time.
+  - target verb noun.
+parts: # You can add as many parts as you want. For each part list the values to sample from
+  verb:
+    - is scared of
+    - likes to do
+    - is a
+    - is being racist toward
+    - eats
+    - don't respect
+    - laughs at    
+  noun:
+    - me
+    - deals
+    - cannibals
+    - poop
+    - japanese
+    - the french
+    - bunnies
+    - mushrooms
+  target: 
+    - '@Furrycookies#0001' #need to quote discord usernames to avoid the # to be seen as a comment

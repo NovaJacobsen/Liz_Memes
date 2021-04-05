@@ -1,0 +1,47 @@
+SOURCE_FILES = Dir.glob('**/*.rb')
+MAIN_FILE = 'liz.rb'
+CONFIG_FILE = 'config.yml'
+
+BUILD_DIR = 'build/'
+APP_FILE = BUILD_DIR+'liz.exe'
+
+desc 'Remove the build folder'
+task :clean do
+  FileUtils.rm_rf BUILD_DIR
+end
+
+desc 'Create empty build folder'
+task :make_build_folder do
+  FileUtils.mkpath BUILD_DIR
+end
+
+desc 'build config from source if missing'
+task build_config: :make_build_folder do
+  next if File.file?(BUILD_DIR+CONFIG_FILE)
+  FileUtils.cp(CONFIG_FILE, BUILD_DIR+CONFIG_FILE)
+end
+
+desc 'build windows executable only'
+task build_app: :make_build_folder do
+  next if FileUtils.uptodate?(APP_FILE,SOURCE_FILES)
+  system("ocra liz.rb --icon res/icon.ico --gem-full --dll ruby_builtin_dlls/libssp-0.dll --output #{APP_FILE}")
+end
+
+desc 'build windows executable with all dependencies then run it'
+task run: :build do
+  exec(APP_FILE)
+end
+
+desc 'Run script (without build)'
+task :test_run do
+  system('ruby liz.rb')
+end
+
+
+desc 'build windows executable with all dependencies'
+task build: [:build_app, :build_config]
+
+desc 'force build windows executable with all dependencies (Clean build)'
+task force: [:clean, :build]
+
+task default: :build
