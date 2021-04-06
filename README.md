@@ -1,7 +1,7 @@
 # Liz_Memes
 
 ## What the hell is this
-This is an internal joke taken way too far.
+This is an inside joke taken way too far.
 
 The program creates random sentences from a configurable template (or templates)
 
